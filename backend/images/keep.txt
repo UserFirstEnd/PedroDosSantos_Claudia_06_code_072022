@@ -1,0 +1,3 @@
+txt file with explanation:
+
+to allow this empty folder "IMAGES" to be uploaded to github !!!
