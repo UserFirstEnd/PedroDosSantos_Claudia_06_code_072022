@@ -1,14 +1,24 @@
-const express = require('express'); //npm i express
+/*With this file we'll call the controller so that the user can see all the sauces 
+(his own and those of other users) and he can create, 
+view, like / dislike, modify, delete a sauce*/
+
+const express = require('express');
+
+//reuse authentication part code of REST server
 const router = express.Router();
 
-const auth = require('../middleware/auth'); // Middleware auth pour sécuriser les routes
-const multer = require('../middleware/multer-config'); // Middleware multer pour gérer les images
 const sauceCtrl = require('../controllers/sauces');
 
-router.get('/', auth, sauceCtrl.getAllSauces);
+//middleware aut to secure routes
+const auth = require('../middleware/auth');
+//multer middleware to manage images
+const multer = require('../middleware/multer-config');
+
+//CRUD
 router.post('/', auth, multer, sauceCtrl.createSauce);
-router.get('/:id', auth, sauceCtrl.getOneSauce);
 router.post("/:id/like", auth, sauceCtrl.likeSauce);
+router.get('/', auth, sauceCtrl.getAllSauces);
+router.get('/:id', auth, sauceCtrl.getOneSauce);
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
 

@@ -1,3 +1,6 @@
+//File with sauce model/collection
+
+//import the mongoose package
 const mongoose = require('mongoose');
 
 const sauceSchema = mongoose.Schema({
@@ -14,4 +17,5 @@ const sauceSchema = mongoose.Schema({
   usersDisliked: { type: Array, required: true },
 });
 
+//export of the model to be able to use it
 module.exports = mongoose.model('Sauce', sauceSchema);

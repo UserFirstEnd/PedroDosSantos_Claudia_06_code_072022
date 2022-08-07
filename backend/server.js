@@ -1,5 +1,12 @@
+//server.js : file for creating a server that will use app.js
+
 const http = require('http');
+
+//export app
 const app = require('./app');
+
+//our server
+const server = http.createServer(app);
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
@@ -12,8 +19,13 @@ const normalizePort = val => {
   }
   return false;
 };
+
+//our variable for the port
 const port = normalizePort('3000' || process.env.PORT);
 app.set('port', port);
+
+//listen the value off variable port
+server.listen(port);
 
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
@@ -35,13 +47,9 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
-
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
   console.log('Listening on ' + bind);
 });
-
-server.listen(port);

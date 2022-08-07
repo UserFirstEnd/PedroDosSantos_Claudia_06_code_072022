@@ -1,4 +1,5 @@
-const multer = require('multer'); //Middleware node.js pour la gestion multipart/form-data : npm i multer
+//middleware node.js for multipart/form-data management: npm i multer
+const multer = require('multer');
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
@@ -6,6 +7,7 @@ const MIME_TYPES = {
   'image/png': 'png'
 };
 
+//indicates to multer where save the files
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, 'images');
@@ -17,5 +19,6 @@ const storage = multer.diskStorage({
   }
 });
 
+//export of multer configured with const storage and indication that we want to manage only image files
 module.exports = multer({storage: storage}).single('image');
 
